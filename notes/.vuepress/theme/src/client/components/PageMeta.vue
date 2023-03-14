@@ -49,7 +49,7 @@ const useEditNavLink = (): ComputedRef<null | NavLink> => {
     if (!editLink) return null;
 
     return {
-      text: editLinkText ?? "Edit this page on GitHub",
+      text: editLinkText ?? "",
       link: editLink
     };
   });

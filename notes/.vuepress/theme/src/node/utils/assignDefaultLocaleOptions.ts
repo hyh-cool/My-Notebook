@@ -17,7 +17,7 @@ export const DEFAULT_LOCALE_OPTIONS: DefaultThemeLocaleOptions = {
   sidebarDepth: 2,
 
   // page meta
-  editLink: true,
+  editLink: false,
   editLinkText: "Edit this page on GitHub",
   lastUpdated: true,
   lastUpdatedText: "Last Updated",
