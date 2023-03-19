@@ -11,5 +11,3 @@
 
 ## Websites
 
-## To Do List
-

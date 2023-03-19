@@ -61,9 +61,21 @@ module.exports = {
         ]
       },
       {
+        text: "Reading",
+        link: "/reading/"
+      },
+      {
         text: "Snippets",
         link: "/snippets/"
-      }
+      },
+      {
+        text: "Tools",
+        link: "/tools/"
+      },
+      {
+        text: "To do List",
+        link: "/to-do-list/"
+      },
     ],
 
     sidebar: {

@@ -6,5 +6,3 @@
 
 ## Websites
 
-## To Do List
-
