@@ -1,0 +1,1 @@
+const e={key:"v-239176ae",path:"/software/rt-thread/",title:"RT-Thread",lang:"en-US",frontmatter:{},excerpt:"",headers:[{level:2,title:"Courses",slug:"courses",children:[]},{level:2,title:"Books",slug:"books",children:[]},{level:2,title:"Websites",slug:"websites",children:[]}],git:{updatedTime:1679232277e3},filePathRelative:"software/rt-thread/README.md"};export{e as data};

@@ -1,0 +1,1 @@
+const t={key:"v-d440f426",path:"/tools/",title:"Websites & Tools",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1679232277e3},filePathRelative:"tools/README.md"};export{t as data};
