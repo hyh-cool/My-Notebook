@@ -1,0 +1,1 @@
+const t={key:"v-ad4da0e4",path:"/reading/Atomic_Habits/%E6%80%BB%E7%BB%93.html",title:"",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1679442103e3},filePathRelative:"reading/Atomic_Habits/\u603B\u7ED3.md"};export{t as data};
