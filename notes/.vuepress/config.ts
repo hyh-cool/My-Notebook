@@ -79,6 +79,7 @@ module.exports = {
     ],
 
     sidebar: {
+      //算法
       "/software/algo/": [
         {
           text: "时间、空间复杂度",
@@ -96,7 +97,25 @@ module.exports = {
             "/software/algo/basic/队列.md",
           ]
         },
-      ]
+      ],
+      //RT-Thread
+      "/software/rt-thread/": [
+        {
+          text: "内核基础",
+          children: [
+            "/software/rt-thread/startup/RT-Thread启动流程.md"
+          ]
+        },
+      ],
+      //reading 
+      "/reading/": [
+        {
+          text: "掌控习惯",
+          children: [
+            "/reading/Atomic_Habits/摘抄.md"
+          ]
+        },
+      ],
     }
   },
 
