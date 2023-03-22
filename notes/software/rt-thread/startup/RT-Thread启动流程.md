@@ -16,4 +16,10 @@
 
 ### 1.汇编部分 --- startup_xxx.s文件解析
 
+以 MDK环境下的 `startup_stm32xxx.s`汇编文件为例，来分析一下STM32的启动过程。
+
+#### 开辟栈空间和堆空间
+
+
+
 ### 2.C语言部分 --- rtthread_startup函数说明
