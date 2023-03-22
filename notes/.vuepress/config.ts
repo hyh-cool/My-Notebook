@@ -1,9 +1,9 @@
 import { path } from "@vuepress/utils";
+const { mdPlusPlugin } = require("@renovamen/vuepress-plugin-md-plus");
 
 module.exports = {
   title: "hyh's Note",
   description: "hyh's notebook.",
-
   head: [
     ["link", { rel: "icon", href: "/favicon.jpg" }],
     [
@@ -119,7 +119,9 @@ module.exports = {
     }
   },
 
-  plugins: [["@vuepress/plugin-search"], ["@renovamen/vuepress-plugin-katex"]],
+  plugins: [["@vuepress/plugin-search"], ["@renovamen/vuepress-plugin-katex"],mdPlusPlugin({
+    all: true // 全部启用，优先级高于其他配置项（默认：false）
+  })],
 
   markdown: {
     extractHeaders: {
