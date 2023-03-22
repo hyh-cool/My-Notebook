@@ -1,0 +1,1 @@
+const t={key:"v-70dc9dd5",path:"/reading/Atomic_Habits/%E6%91%98%E6%8A%84.html",title:"\u7B2C\u4E00\u7AE0  \u5FAE\u4E60\u60EF\u7684\u60CA\u4EBA\u529B\u91CF - \u6458\u6284",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1679527244e3},filePathRelative:"reading/Atomic_Habits/\u6458\u6284.md"};export{t as data};
