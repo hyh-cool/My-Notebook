@@ -22,7 +22,7 @@ module.exports = {
   themeConfig: {
     logo: "/apple-touch-icon.png",
 
-    repo: "hyh-cool/note.hyh.cool",
+    repo: "hyh-cool/My-Notebook",
     docsDir: "notes",
     docsBranch: "master",
 
