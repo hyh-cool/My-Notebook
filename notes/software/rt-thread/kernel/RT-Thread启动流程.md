@@ -152,10 +152,9 @@ rt_hw_interrupt_enable    PROC
 
 `rt_hw_interrupt_enable`该函数的作用是启用CPU中断。具体来说，它使用了汇编指令`MSR`来将传递给函数的参数(level)的值存入处理器状态寄存器(PRIMASK)中，然后使用指令`BX LR`返回函数调用处。
 
-#### 2.2 板级硬件初始化 - rt_hw_board_init
+#### 2.2 板级硬件初始化 -- rt_hw_board_init
 
-
-- 设置中断向量表的基地址，具体是根据宏定义的 `VECT_TAB_RAM` 还是 `VECT_TAB_FLASH` 来选择基地址，这个基地址告诉 CPU 当中断发生时去哪里找到中断服务程序的入口。
+1. 设置中断向量表的基地址，具体是根据宏定义的 `VECT_TAB_RAM` 还是 `VECT_TAB_FLASH` 来选择基地址，这个基地址告诉 CPU 当中断发生时去哪里找到中断服务程序的入口。
 
 ```c
 /* NVIC Configuration */
@@ -168,7 +167,8 @@ rt_hw_interrupt_enable    PROC
     SCB->VTOR  = (0x08000000 & NVIC_VTOR_MASK);
 #endif
 ```
-- 首先是Hal库的初始化，包括配置Flash预取、Systick配置等；然后调用`SystemClock_Config`进行系统时钟配置,接着初始化GPIO、串口；如果使用了RT-Thread 的控制台功能，则设置控制台设备为 `RT_CONSOLE_DEVICE_NAME`。
+2. 首先是HAL库的初始化，包括配置Flash预取、Systick配置等；然后调用`SystemClock_Config`进行系统时钟配置,接着初始化GPIO、串口；如果使用了RT-Thread 的控制台功能，则设置控制台设备为 `RT_CONSOLE_DEVICE_NAME`。
+
 ```c
 /* HAL_Init() function is called at the beginning of program after reset and before
  * the clock configuration.
@@ -185,7 +185,7 @@ rt_hw_interrupt_enable    PROC
 #endif
 ```
 
--  接着是RT-Thread的动态内存管理，将`HEAP_BEGIN`与`HEAP_END`之间的内存空间作为动态内存空间交由RT-Thread进行管理。对于`RT_USING_MEMHEAP`宏定义开启情况下的内存管理应用详情见[RT-Thread内存管理](./RT-Thread内存管理.md)一文。
+3. 接着是RT-Thread的动态内存管理，将`HEAP_BEGIN`与`HEAP_END`之间的内存空间作为动态内存空间交由RT-Thread进行管理。对于`RT_USING_MEMHEAP`宏定义开启情况下的内存管理应用详情见[RT-Thread内存管理](./RT-Thread内存管理.md)一文。
 
 ```c
 #define HEAP_BEGIN    (&Image$$RW_IRAM1$$ZI$$Limit)
@@ -201,7 +201,11 @@ rt_hw_interrupt_enable    PROC
 #endif
 ```
 
-`&Image$$RW_IRAM1$$ZI$$Limit`是一个链接脚本文件中的符号。`&`表示获取地址，`Image`表示链接脚本文件的名称，`RW_IRAM1`表示内存段的名称，`ZI`表示该段为未初始化数据段，`Limit`表示该段的结束位置。因此，`&Image$$RW_IRAM1$$ZI$$Limit`表示该段未初始化数据段的结束地址的指针，即动态内存分配的起始地址。
+::: tip 补充
 
-- 板级组件初始化：首先，它检查是否启用了`RT_USING_COMPONENTS_INIT`宏定义，若启用，就调用了`rt_components_board_init`函数。该函数实现了一种自动初始化机制，初始化函数不需要被显式调用，只需要在函数定义处通过宏定义的方式进行申明，就会在系统启动过程中被执行。详情见[RT-Thread自动初始化机制](./RT-Thread自动初始化机制.md)。
+​	`&Image$$RW_IRAM1$$ZI$$Limit`是一个链接脚本文件中的符号。`&`表示获取地址，`Image`表示链接脚本文件的名称，`RW_IRAM1`表示内存段的名称，`ZI`表示该段为未初始化数据段，`Limit`表示该段的结束位置。因此，`&Image$$RW_IRAM1$$ZI$$Limit`表示该段未初始化数据段的结束地址的指针，即动态内存分配的起始地址。
+
+:::
+
+4. 板级组件初始化：首先，它检查是否启用了`RT_USING_COMPONENTS_INIT`宏定义，若启用，就调用了`rt_components_board_init`函数。该函数实现了一种自动初始化机制，初始化函数不需要被显式调用，只需要在函数定义处通过宏定义的方式进行申明，就会在系统启动过程中被执行。详情见[RT-Thread自动初始化机制](./RT-Thread自动初始化机制.md)。
 

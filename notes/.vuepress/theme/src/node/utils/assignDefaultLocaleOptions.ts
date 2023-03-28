@@ -14,10 +14,10 @@ export const DEFAULT_LOCALE_OPTIONS: DefaultThemeLocaleOptions = {
 
   // sidebar
   sidebar: "auto",
-  sidebarDepth: 2,
+  sidebarDepth: 3,
 
   // page meta
-  editLink: false,
+  editLink: true,
   editLinkText: "Edit this page on GitHub",
   lastUpdated: true,
   lastUpdatedText: "Last Updated",

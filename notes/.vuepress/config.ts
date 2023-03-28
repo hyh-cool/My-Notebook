@@ -103,7 +103,10 @@ module.exports = {
         {
           text: "内核基础",
           children: [
-            "/software/rt-thread/kernel/RT-Thread启动流程.md"
+            "/software/rt-thread/kernel/RT-Thread启动流程.md",
+            "/software/rt-thread/kernel/RT-Thread程序内存分布.md",
+            "/software/rt-thread/kernel/RT-Thread自动初始化机制.md",
+            "/software/rt-thread/kernel/RT-Thread内存管理.md"
           ]
         },
       ],
