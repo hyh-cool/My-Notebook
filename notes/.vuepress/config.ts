@@ -103,7 +103,7 @@ module.exports = {
         {
           text: "内核基础",
           children: [
-            "/software/rt-thread/startup/RT-Thread启动流程.md"
+            "/software/rt-thread/kernel/RT-Thread启动流程.md"
           ]
         },
       ],
