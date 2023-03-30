@@ -125,6 +125,13 @@
 
 ![](https://hyh1370039199-1313349927.cos.ap-chengdu.myqcloud.com/img/202303271638497.png)
 
+这部分代码，大致可以分为四个部分：
+
+- 初始化与系统相关的硬件；
+- 初始化系统内核对象，例如定时器、调度器、信号；
+- 创建main线程，在main线程中对各类模块依次进行初始化；
+- 初始化定时器线程、空闲线程，并启动调度器；
+
 #### 2.1 RT-Thread开关中断
 
 ```asm
@@ -185,7 +192,7 @@ rt_hw_interrupt_enable    PROC
 #endif
 ```
 
-3. 接着是RT-Thread的动态内存管理，将`HEAP_BEGIN`与`HEAP_END`之间的内存空间作为动态内存空间交由RT-Thread进行管理。对于`RT_USING_MEMHEAP`宏定义开启情况下的内存管理应用详情见[RT-Thread内存管理](./RT-Thread内存管理.md)一文。
+3. 接着是RT-Thread的动态内存管理，将`HEAP_BEGIN`与`HEAP_END`之间的内存空间作为动态内存空间交由RT-Thread进行管理。对于`RT_USING_MEMHEAP`宏定义开启情况下的内存管理应用详情见[RT-Thread内存管理](../memory/RT-Thread内存管理.md)一文。
 
 ```c
 #define HEAP_BEGIN    (&Image$$RW_IRAM1$$ZI$$Limit)
@@ -208,4 +215,111 @@ rt_hw_interrupt_enable    PROC
 :::
 
 4. 板级组件初始化：首先，它检查是否启用了`RT_USING_COMPONENTS_INIT`宏定义，若启用，就调用了`rt_components_board_init`函数。该函数实现了一种自动初始化机制，初始化函数不需要被显式调用，只需要在函数定义处通过宏定义的方式进行申明，就会在系统启动过程中被执行。详情见[RT-Thread自动初始化机制](./RT-Thread自动初始化机制.md)。
+
+#### 2.3 定时器管理
+
+`rt_system_timer_init`：
+
+该函数初始化了一个定时器列表`rt_timer_list`，并将其里面的元素初始化为空。
+
+`rt_system_timer_thread_init`：
+
+若`RT_USING_TIMER_SOFT`宏定义开启，该函数会初始化一个软件定时器列表`rt_soft_timer_list`，并将其里面的元素初始化为空。然后创建了一个名为`timer`的线程，并将其入口点设置为`rt_thread_timer_entry`函数。最后，该线程被启动，开始运行。
+
+关于定时器管理部分将在[RT-Thread定时器管理](../clock/RT-Thread定时器管理.md)展开讲解。
+
+#### 2.4 调度器初始化及启动
+
+`rt_system_scheduler_init`：
+
+该函数初始化了系统中所有线程的优先级表`rt_thread_priority_table`,并将其里面的所有元素初始化为空。如果系统支持SMP（Symmetric Multi-Processing，对称多处理），还会初始化每个CPU上的优先级表和其他相关参数。接着该函数初始化了系统所有线程的就绪优先级组`rt_thread_ready_priority_group`和就绪表`rt_thread_ready_table`。最后，该函数将线程死亡列表`rt_thread_defunct`初始化为空列表。
+
+`rt_system_scheduler_start`：该函数会选择优先级最高的线程，并将其设置为当前线程。然后该函数会从就绪表中删除该线程，并将其状态设置为运行状态，接着，该函数会切换至该线程，并开始执行。==最后，该函数永远不会返回==。
+
+![](https://hyh1370039199-1313349927.cos.ap-chengdu.myqcloud.com/img/202303291357047.png)
+
+关于线程管理部分将在[RT-Thread线程管理](../thread/RT-Thread线程管理.md)展开讲解。
+
+#### 2.5 main线程创建 -- rt_application_init
+
+```c
+void rt_application_init(void)
+{
+    rt_thread_t tid;
+
+#ifdef RT_USING_HEAP
+    tid = rt_thread_create("main", main_thread_entry, RT_NULL,
+                           RT_MAIN_THREAD_STACK_SIZE, RT_MAIN_THREAD_PRIORITY, 20);
+    RT_ASSERT(tid != RT_NULL);
+#else
+    rt_err_t result;
+
+    tid = &main_thread;
+    result = rt_thread_init(tid, "main", main_thread_entry, RT_NULL,
+                            main_stack, sizeof(main_stack), RT_MAIN_THREAD_PRIORITY, 20);
+    RT_ASSERT(result == RT_EOK);
+	
+    /* if not define RT_USING_HEAP, using to eliminate the warning */
+    (void)result;
+#endif
+
+    rt_thread_startup(tid);
+}
+```
+
+首先该函数创建了一个名为“main”的线程，其入口点设置为`main_thread_entry`函数，如果系统支持堆内存分配`RT_USING_HEAP`，则会使用`rt_thread_create`函数创建该线程；如果不支持堆内存分配，则会使用`rt_thread_init`函数创建该线程。最后，该函数启动该线程，并开始运行。
+
+```c
+/* the system main thread */
+void main_thread_entry(void *parameter)
+{
+    extern int main(void);
+    extern int $Super$$main(void);
+
+    /* RT-Thread components initialization */
+    rt_components_init();
+
+#ifdef RT_USING_SMP
+    rt_hw_secondary_cpu_up();
+#endif
+    /* invoke system main function */
+#if defined(__CC_ARM) || defined(__CLANG_ARM)
+    $Super$$main(); /* for ARMCC. */
+#elif defined(__ICCARM__) || defined(__GNUC__)
+    main();
+#endif
+}
+```
+
+该函数首先调用`rt_components_init`对RT-Thread组件进行初始化，如果系统支持`SMP`，则还会调用`rt_hw_secondary_cpu_up`函数来启动其他CPU，最后该函数调用  `$Super$$main`来执行系统主函数。
+
+#### 2.6 空闲idle线程创建
+
+```c
+void rt_thread_idle_init(void)
+{
+    rt_ubase_t i;
+    char tidle_name[RT_NAME_MAX];
+
+    for (i = 0; i < _CPUS_NR; i++)
+    {
+        rt_sprintf(tidle_name, "tidle%d", i);
+        rt_thread_init(&idle[i],
+                tidle_name,
+                rt_thread_idle_entry,
+                RT_NULL,
+                &rt_thread_stack[i][0],
+                sizeof(rt_thread_stack[i]),
+                RT_THREAD_PRIORITY_MAX - 1,
+                32);
+#ifdef RT_USING_SMP
+        rt_thread_control(&idle[i], RT_THREAD_CTRL_BIND_CPU, (void*)i);
+#endif
+        /* startup */
+        rt_thread_startup(&idle[i]);
+    }
+}
+```
+
+空闲线程是一个特殊的线程，它会在系统中没有其他线程需要运行时自动运行，并在循环中调用`rt_thread_idle_entry`函数以保持CPU处于空闲状态。`rt_thread_idle_init`函数会为每个CPU创建一个空闲线程。首先，该函数使用`rt_sprintf`函数生成空闲线程的名称，格式为“tidleX”，其中X表示CPU编号。然后，使用`rt_thread_init`函数初始化该线程，并将其入口点设置为`rt_thread_idle_entry`函数。然后该函数为该线程分配堆栈空间，并设置线程的优先级为`RT_THREAD_PRIORITY_MAX - 1`，即最低优先级。如果系统支持`SMP`，则还会使用`rt_thread_control`函数将该线程绑定到对应的CPU上。最后，该线程被启动，并开始运行。
 

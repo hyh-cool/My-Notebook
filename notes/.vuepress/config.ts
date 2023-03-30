@@ -106,16 +106,46 @@ module.exports = {
             "/software/rt-thread/kernel/RT-Thread启动流程.md",
             "/software/rt-thread/kernel/RT-Thread程序内存分布.md",
             "/software/rt-thread/kernel/RT-Thread自动初始化机制.md",
-            "/software/rt-thread/kernel/RT-Thread内存管理.md"
+            "/software/rt-thread/kernel/RT-Thread内核对象模型.md",
+            "/software/rt-thread/kernel/RT-Thread内核配置及常用宏定义说明.md"
+          ]
+        },
+        {
+          text: "线程管理",
+          children: [
+            "/software/rt-thread/thread/RT-Thread线程管理.md",
+          ]
+        },
+        {
+          text: "时钟管理",
+          children: [
+            "/software/rt-thread/clock/RT-Thread定时器管理.md",
+          ]
+        },
+        {
+          text: "内存管理",
+          children: [
+            "/software/rt-thread/memory/RT-Thread内存管理.md",
           ]
         },
       ],
+      
       //reading 
       "/reading/": [
         {
           text: "掌控习惯",
           children: [
             "/reading/Atomic_Habits/摘抄.md"
+          ]
+        },
+      ],
+
+      //hardware
+      "/hardware/basic": [
+        {
+          text: "硬件基础",
+          children: [
+            "/hardware/basic/daily/日常杂项记录.md"
           ]
         },
       ],
