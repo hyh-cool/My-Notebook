@@ -53,6 +53,12 @@ RT-Thread 的自动初始化机制使用了自定义 RTI 符号段，将需要�
 
 整个宏定义`INIT_EXPORT(fn, level)` 的作用就是将函数fn的地址赋给一个`__rt_init_##fn`的指针，然后放入相应level的数据段中。函数使用自动初始化宏后，这些数据段中就会存储指向各个初始化函数的指针。
 
+::: warning 注意
+
+`__rt_init_##fn`的`##`符号是连接的意思，举例`INIT_EXPORT(board_init, "1")` 就会生成一个`__rt_init_board_init`的指针.
+
+::: 
+
 举例：
 
 ```c
