@@ -61,10 +61,6 @@ module.exports = {
         ]
       },
       {
-        text: "Reading",
-        link: "/reading/"
-      },
-      {
         text: "Snippets",
         link: "/snippets/"
       },
@@ -73,9 +69,18 @@ module.exports = {
         link: "/tools/"
       },
       {
+        text: "Reading",
+        link: "/reading/"
+      },
+      {
+        text: "Finance",
+        link: "/finance/"
+      },
+      {
         text: "To do List",
         link: "/to-do-list/"
       },
+
     ],
 
     sidebar: {
@@ -129,16 +134,6 @@ module.exports = {
           ]
         },
       ],
-      
-      //reading 
-      "/reading/": [
-        {
-          text: "掌控习惯",
-          children: [
-            "/reading/Atomic_Habits/摘抄.md"
-          ]
-        },
-      ],
 
       //hardware
       "/hardware/basic": [
@@ -149,6 +144,32 @@ module.exports = {
           ]
         },
       ],
+
+      //reading 
+      "/reading/": [
+        {
+          text: "掌控习惯",
+          children: [
+            "/reading/Atomic_Habits/Chapter1-阅读摘抄.md"
+          ]
+        },
+      ],
+      //reading 
+      "/finance/": [
+        {
+          text: "理财书籍",
+          children: [
+            {
+              text: "纳瓦尔宝典",
+              children: [
+                "/finance/books/Naval/Chapter1-阅读摘抄.md"
+              ]
+            },
+            
+          ]
+        },
+      ],
+
     }
   },
 
