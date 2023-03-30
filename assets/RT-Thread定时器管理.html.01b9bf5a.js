@@ -1,0 +1,1 @@
+const e={key:"v-e45a3da0",path:"/software/rt-thread/clock/RT-Thread%E5%AE%9A%E6%97%B6%E5%99%A8%E7%AE%A1%E7%90%86.html",title:"RT-Thread \u5B9A\u65F6\u5668\u7BA1\u7406",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1680170238e3},filePathRelative:"software/rt-thread/clock/RT-Thread\u5B9A\u65F6\u5668\u7BA1\u7406.md"};export{e as data};
