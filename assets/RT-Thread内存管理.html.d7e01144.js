@@ -1,1 +1,0 @@
-const e={key:"v-197733de",path:"/software/rt-thread/memory/RT-Thread%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html",title:"RT-Thread \u5185\u5B58\u7BA1\u7406",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1680154892e3},filePathRelative:"software/rt-thread/memory/RT-Thread\u5185\u5B58\u7BA1\u7406.md"};export{e as data};
