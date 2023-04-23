@@ -1,0 +1,1 @@
+const a={key:"v-47ad8b86",path:"/finance/books/Naval/%E9%98%85%E8%AF%BB%E6%91%98%E6%8A%84.html",title:"\u9605\u8BFB\u6458\u6284",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1682254817e3},filePathRelative:"finance/books/Naval/\u9605\u8BFB\u6458\u6284.md"};export{a as data};

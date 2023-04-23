@@ -1,1 +1,0 @@
-const e={key:"v-d440f426",path:"/tools/",title:"Websites & Tools",lang:"en-US",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u7F51\u7AD9",slug:"\u7F51\u7AD9",children:[]},{level:2,title:"\u5DE5\u5177",slug:"\u5DE5\u5177",children:[]}],git:{updatedTime:1680170238e3},filePathRelative:"tools/README.md"};export{e as data};
