@@ -49,6 +49,10 @@ module.exports = {
             text: "RT-Thread",
             link: "/software/rt-thread/"
           },
+          {
+            text: "Linux",
+            link: "/software/linux/"
+          },
         ]
       },
       {
@@ -63,10 +67,6 @@ module.exports = {
       {
         text: "Snippets",
         link: "/snippets/"
-      },
-      {
-        text: "Tools",
-        link: "/tools/"
       },
       {
         text: "Reading",
@@ -134,7 +134,15 @@ module.exports = {
           ]
         },
       ],
-
+      //Linux
+      "/software/linux/": [
+        {
+          text: "应用编程",
+          children: [
+            "/software/linux/Application_Program/应用编程.md",
+          ]
+        },
+      ],
       //hardware
       "/hardware/basic": [
         {
@@ -150,7 +158,13 @@ module.exports = {
         {
           text: "掌控习惯",
           children: [
-            "/reading/Atomic_Habits/Chapter1-阅读摘抄.md"
+            "/reading/Atomic_Habits/阅读摘抄.md"
+          ]
+        },
+        {
+          text: "B站Up主-硬核的HeyMatt",
+          children: [
+            "/reading/Bilibili_Up_HeyMatt/观点摘抄.md"
           ]
         },
       ],
@@ -162,7 +176,7 @@ module.exports = {
             {
               text: "纳瓦尔宝典",
               children: [
-                "/finance/books/Naval/Chapter1-阅读摘抄.md"
+                "/finance/books/Naval/阅读摘抄.md"
               ]
             },
             

@@ -79,3 +79,20 @@ export default {
 <span class="demo" :class="$style.red">红色</span>
 <span class="demo" :class="$style.blue">蓝色</span>
 
+### 自定义容器
+
+::: tip
+这是一个提示
+:::
+
+::: warning
+这是一个警告
+:::
+
+::: danger
+这是一个危险警告
+:::
+
+::: details
+这是一个 details 标签
+:::
