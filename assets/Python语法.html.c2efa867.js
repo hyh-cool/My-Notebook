@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as o,b as a,a as _}from"./app.d29eff36.js";const n={},s={id:"python\u8BED\u6CD5",tabindex:"-1"},c=a("a",{class:"header-anchor",href:"#python\u8BED\u6CD5","aria-hidden":"true"},"#",-1),r=_(" Python\u8BED\u6CD5"),h=[c,r];function d(i,f){return t(),o("h1",s,h)}var m=e(n,[["render",d],["__file","Python\u8BED\u6CD5.html.vue"]]);export{m as default};
