@@ -73,10 +73,6 @@ module.exports = {
         link: "/reading/"
       },
       {
-        text: "Finance",
-        link: "/finance/"
-      },
-      {
         text: "To do List",
         link: "/to-do-list/"
       },
@@ -140,6 +136,7 @@ module.exports = {
           text: "应用编程",
           children: [
             "/software/linux/Application_Program/应用编程.md",
+            "/software/linux/Application_Program/文件IO基础.md",
           ]
         },
       ],
@@ -152,38 +149,6 @@ module.exports = {
           ]
         },
       ],
-
-      //reading 
-      "/reading/": [
-        {
-          text: "掌控习惯",
-          children: [
-            "/reading/Atomic_Habits/阅读摘抄.md"
-          ]
-        },
-        {
-          text: "B站Up主-硬核的HeyMatt",
-          children: [
-            "/reading/Bilibili_Up_HeyMatt/观点摘抄.md"
-          ]
-        },
-      ],
-      //reading 
-      "/finance/": [
-        {
-          text: "理财书籍",
-          children: [
-            {
-              text: "纳瓦尔宝典",
-              children: [
-                "/finance/books/Naval/阅读摘抄.md"
-              ]
-            },
-            
-          ]
-        },
-      ],
-
     }
   },
 
